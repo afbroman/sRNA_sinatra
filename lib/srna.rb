@@ -5,7 +5,7 @@ class SRNA < Sinatra::Base
     haml :index, format: :html5
   end
   
-  post '/' do
+  post '/index' do
     haml :index, format: :html5
     # Construct config file
     # Write config file to disk? Display in browser?
