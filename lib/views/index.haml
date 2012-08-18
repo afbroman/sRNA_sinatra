@@ -1,0 +1,93 @@
+%h1 sRNA App
+%form{action: :index, method: :post}
+  %label{for: "replicon"} Select your replicon of interest:
+  %input{type: "text", name: "replicon"}
+  %br
+
+  %label{for: "partner"} Select the partner replicons for BLAST:
+  %input{type: "text", name: "partner"}
+  %br
+
+  %label{for: "max_blast_e"} Maximum BLAST E
+  %input{type: "text", name: "max_blast_e"}
+  %br
+
+  %label{for: "min_blast_s"} Minimum BLAST S
+  %input{type: "text", name: "min_blast_s"}
+  %br
+
+  %label{for: "min_blast_percent"} Minimum BLAST % identity
+  %input{type: "text", name: "min_blast_percent"}
+  %br
+
+  %label{for: "max_blast_hsp"} Maximum BLAST HSP length
+  %input{type: "text", name: "max_blast_hsp"}
+  %br
+
+  %label{for: "min_transterm"} Minimum TransTerm score
+  %input{type: "text", name: "min_transterm"}
+  %br
+
+  %label{for: "max_findterm"} Maximum FindTerm score
+  %input{type: "text", name: "max_findterm"}
+  %br
+
+  %label{for: "max_rnamotif"} Maximum RNAMotif score
+  %input{type: "text", name: "max_rnamotif"}
+  %br
+
+  %label{for: "min_locus"} Minimum predicted locus length
+  %input{type: "text", name: "min_locus"}
+  %br
+
+  %label{for: "max_locus"} Maximum predicted locus length
+  %input{type: "text", name: "max_locus"}
+  %br
+
+  %label{for: "min_locus_start_orf_start"} Min dist locus start to ORF start
+  %input{type: "text", name: "min_locus_start_orf_start"}
+  %br
+
+  %label{for: "min_locus_start_orf_end"} Min dist locus start to ORF end
+  %input{type: "text", name: "min_locus_start_orf_end"} 
+  %br
+
+  %label{for: "min_locus_end_orf_start"} Min dist locus end to ORF start
+  %input{type: "text", name: "min_locus_end_orf_start"} 
+  %br
+
+  %label{for: "min_locus_end_orf_end"} Min dist locus end to ORF stop
+  %input{type: "text", name: "min_locus_end_orf_end"} 
+  %br
+
+  %label{for: "max_gap"} Maximum gap cons->term
+  %input{type: "text", name: "max_gap"} 
+  %br
+
+  %label{for: "min_locus_percent"} Minimum locus % of HSP length
+  %input{type: "text", name: "min_locus_percent"} 
+  %br
+
+  %label{for: "min_tfbs"} Min dist TFBS from ORF start
+  %input{type: "text", name: "min_tfbs"} 
+  %br
+
+  %input{type: "submit"}
+
+
+:javascript
+  function addOption(theSel, theText, theValue)
+  {
+    var newOpt = new Option(theText, theValue);
+    var selLength = theSel.length;
+    theSel.options[selLength] = newOpt;
+  }
+
+  function deleteOption(theSel, theIndex)
+  { 
+    var selLength = theSel.length;
+    if(selLength>0)
+    {
+      theSel.options[theIndex] = null;
+    }
+  }
