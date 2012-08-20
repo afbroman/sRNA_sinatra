@@ -1,5 +1,13 @@
-%h1 sRNA App
-%form{action: :index, method: :post}
+%h2 Condor/auto_sRNA Interface - Generate Config File
+%form{action: :index, method: :post, enctype: "multipart/form-data"}
+  %table
+    %tr
+      %td
+        %br
+        %strong 1. Select your replicon of interest:
+        %select{name: 'genome'}
+
+
   %label{for: "replicon"} Select your replicon of interest:
   %input{type: "text", name: "replicon"}
   %br
