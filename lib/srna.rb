@@ -12,12 +12,8 @@ class SRNA < Sinatra::Base
   end
   
   post '/result' do
-    # erb :result
-    # attachment 'sRNAPredict.in'
+    attachment 'sRNAPredict.in'
     build_output_file params[:genome]
-
-    # Construct config file
-    # Offer config file as attachment (see sinatra book p 44)
   end
 
   def self.load_genomes
