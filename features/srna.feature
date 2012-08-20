@@ -5,6 +5,6 @@ Feature: Cucumber web testing
 
   Scenario: View home page
     Given I am on the home page
-    Then I should see "sRNA App"
+    Then I should see "Generate Config File"
     And I should see "Select your replicon of interest:"
     And I should see "Select the partner replicons for BLAST:"

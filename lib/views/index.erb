@@ -1,115 +1,164 @@
 <h2>Condor/auto_sRNA Interface - Generate Config File</h2>
 
-<form action="index" method="post" enctype="multipart/form-data">
+<form action="result" method="post" enctype="multipart/form-data" style="overflow: auto" onsubmit="placeInHidden2('.', 'sel1', 'exc_id');placeInHidden2('.', 'sel3', 'inc_id');">
   <table>
+    <tr>
+      <td><br />
+        <p>
+        <strong>1. Select your replicon of interest:</strong>
+
+        <select name="genome">
+          <% @genomes.each do |name| %>
+            <option value="<%= name[0] %>"><%= "#{name[1]} - #{name[2]} - #{name[0]}"%></option>
+          <% end %>
+        </select>
+        </p>
+        <strong>2. Select the partner replicons for BLAST:</strong>
+        <table>
+          <tr>
+            <td>
+              <input type=radio name="PS" checked value="ALL">Option 1: All replicons<br />
+              <table>
+                <tr>
+                  <td width="32px">&nbsp;&nbsp;&nbsp;</td>
+                  <td>
+                    <input type="checkbox" name="INC_PS">Include replicons in same species</input>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    Excluded replicons:<br />
+                    <select name="sel1" id="sel1" size="6" multiple="multiple" style="width: 360px; font-size: 8pt"></select>
+                  </td>
+                  <td>
+                    <input type="button" value="<- Add" onclick="moveOptions(this.form.sel2, this.form.sel1);" /><br />
+                    <input type="button" value="Remove ->" onclick="moveOptions(this.form.sel1, this.form.sel2);" /><br />
+                  </td>
+                  <td>
+                    All replicons:<br />
+                    <select name="sel2" id="sel2" size="6" multiple="multiple" style="width: 360px; font-size: 8pt">
+                      <% @genomes.each do |name| %>
+                        <option value="<%= name[0] %>"><%= "#{name[1]} - #{name[2]} - #{name[0]}"%></option>
+                      <% end %>
+                    </select>
+                    <input type="hidden" name="exc_val" id="exc_id" />
+                  </td>
+                </tr>
+              </table>
+
+              <input type="radio" name="PS" value="INC">Option 2: Select individual replicons</input><br />
+              <table>
+                <tr>
+                  <td width="24px">&nbsp;</td>
+                  <td>
+                    Included replicons:<br />
+                    <select name="sel3" id="sel3" size="6" multiple="multiple" style="width: 360px; font-size: 8pt"></select>
+                  </td>
+                  <td>
+                    <input type="button" value="<- Add" onclick="moveOptions(this.form.sel4, this.form.sel3);" /><br />
+                    <input type="button" value="Remove ->" onclick="moveOptions(this.form.sel3, this.form.sel4);" /><br />
+                  </td>
+                  <td>
+                    All replicons:<br />
+                    <select name="sel4" id="sel4" size="6" multiple="multiple" style="width: 360px; font-size: 8pt">
+                      <% @genomes.each do |name| %>
+                        <option value="<%= name[0] %>"><%= "#{name[1]} - #{name[2]} - #{name[0]}"%></option>
+                      <% end %>
+                    </select>
+                    <input type="hidden" name="inc_val" id="inc_id">
+                  </td>
+                </tr>
+              </table>
+
+
+              <tr>
+                <td><br />
+                  <strong>3. Modify any parameters you want to change:</strong>
+
+                  <table>
+                    <tr>
+                      <td><label for="MAX_E">Maximum BLAST E</label></td>
+                      <td><input type="text" size="4" name="MAX_E" id="MAX_E" value="5e-3" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MIN_SCORE">Maximum BLAST S</label></td>
+                      <td><input type="text" size="4" name="MIN_SCORE" id="MIN_SCORE" value="0" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MIN_PID">Minimum BLAST % identity</label></td>
+                      <td><input type="text" size="4" name="MIN_PID" id="MIN_PID" value="0" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MAX_HSP">Maximum BLAST HSP length</label></td>
+                      <td><input type="text" size="4" name="MAX_HSP" id="MAX_HSP" value="100000" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MIN_TT">Minimum TransTerm score</label></td>
+                      <td><input type="text" size="4" name="MIN_TT" id="MIN_TT" value="86" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MAX_FT">Maximum FindTerm score</label></td>
+                      <td><input type="text" size="4" name="MAX_FT" id="MAX_FT" value="-10" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MAX_RNAM">Maximum RNAMotif score</label></td>
+                      <td><input type="text" size="4" name="MAX_RNAM" id="MAX_RNAM" value="-6" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MIN_LEN">Minimum predicted locus length</label></td>
+                      <td><input type="text" size="4" name="MIN_LEN" id="MIN_LEN" value="30" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MAX_LEN">Maximum predicted locus length</label></td>
+                      <td><input type="text" size="4" name="MAX_LEN" id="MAX_LEN" value="550" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="SRNA_FROM_ORF_START">Min dist locus start to ORF start</label></td>
+                      <td><input type="text" size="4" name="SRNA_FROM_ORF_START" id="SRNA_FROM_ORF_START" value="-65" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="SRNA_FROM_ORF_END">Min dist locus start to ORF end</label></td>
+                      <td><input type="text" size="4" name="SRNA_FROM_ORF_END" id="SRNA_FROM_ORF_END" value="-65" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="ORF_START_SENSE">Min dist locus end to ORF start</label></td>
+                      <td><input type="text" size="4" name="ORF_START_SENSE" id="ORF_START_SENSE" value="-20" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="ORF_STOP_SENSE">Min dist locus end to ORF stop</label></td>
+                      <td><input type="text" size="4" name="ORF_STOP_SENSE" id="ORF_STOP_SENSE" value="35" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="TERM_FROM_CONV_END">Maximum gap cons->term</label></td>
+                      <td><input type="text" size="4" name="TERM_FROM_CONV_END" id="TERM_FROM_CONV_END" value="35" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="MIN_CONSTTERM">Minimum locus % of HSP length</label></td>
+                      <td><input type="text" size="4" name="MIN_CONSTTERM" id="MIN_CONSTTERM" value="0" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="TF_FROM_ORF_START">Min dist TFBS from ORF start</label></td>
+                      <td><input type="text" size="4" name="TF_FROM_ORF_START" id="TF_FROM_ORF_START" value="0" /></td>
+                    </tr>
+                  </table>
+                  <tr class="submit">
+                    <td><br />
+                      <strong>4. Click to generate configuration file.</strong><br />
+                      <input type="hidden" name="submitted" value="true" />
+                      <input type="submit" value="Generate Config File" /><br /><br />
+                    </td>
+                  </tr>
+
+                </td>
+              </tr>
+
+
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
 
   </table>
-
-
-
 </form>
-
-<!-- 
-%form{action: :index, method: :post, enctype: "multipart/form-data"}
-  %table
-    %tr
-      %td
-        %br
-        %strong 1. Select your replicon of interest:
-        %select{name: 'genome'}
-          %
-
-
-  %label{for: "replicon"} Select your replicon of interest:
-  %input{type: "text", name: "replicon"}
-  %br
-
-  %label{for: "partner"} Select the partner replicons for BLAST:
-  %input{type: "text", name: "partner"}
-  %br
-
-  %label{for: "max_blast_e"} Maximum BLAST E
-  %input{type: "text", name: "max_blast_e"}
-  %br
-
-  %label{for: "min_blast_s"} Minimum BLAST S
-  %input{type: "text", name: "min_blast_s"}
-  %br
-
-  %label{for: "min_blast_percent"} Minimum BLAST % identity
-  %input{type: "text", name: "min_blast_percent"}
-  %br
-
-  %label{for: "max_blast_hsp"} Maximum BLAST HSP length
-  %input{type: "text", name: "max_blast_hsp"}
-  %br
-
-  %label{for: "min_transterm"} Minimum TransTerm score
-  %input{type: "text", name: "min_transterm"}
-  %br
-
-  %label{for: "max_findterm"} Maximum FindTerm score
-  %input{type: "text", name: "max_findterm"}
-  %br
-
-  %label{for: "max_rnamotif"} Maximum RNAMotif score
-  %input{type: "text", name: "max_rnamotif"}
-  %br
-
-  %label{for: "min_locus"} Minimum predicted locus length
-  %input{type: "text", name: "min_locus"}
-  %br
-
-  %label{for: "max_locus"} Maximum predicted locus length
-  %input{type: "text", name: "max_locus"}
-  %br
-
-  %label{for: "min_locus_start_orf_start"} Min dist locus start to ORF start
-  %input{type: "text", name: "min_locus_start_orf_start"}
-  %br
-
-  %label{for: "min_locus_start_orf_end"} Min dist locus start to ORF end
-  %input{type: "text", name: "min_locus_start_orf_end"} 
-  %br
-
-  %label{for: "min_locus_end_orf_start"} Min dist locus end to ORF start
-  %input{type: "text", name: "min_locus_end_orf_start"} 
-  %br
-
-  %label{for: "min_locus_end_orf_end"} Min dist locus end to ORF stop
-  %input{type: "text", name: "min_locus_end_orf_end"} 
-  %br
-
-  %label{for: "max_gap"} Maximum gap cons->term
-  %input{type: "text", name: "max_gap"} 
-  %br
-
-  %label{for: "min_locus_percent"} Minimum locus % of HSP length
-  %input{type: "text", name: "min_locus_percent"} 
-  %br
-
-  %label{for: "min_tfbs"} Min dist TFBS from ORF start
-  %input{type: "text", name: "min_tfbs"} 
-  %br
-
-  %input{type: "submit"}
--->
-
-
-<script>
-  function addOption(theSel, theText, theValue)
-  {
-    var newOpt = new Option(theText, theValue);
-    var selLength = theSel.length;
-    theSel.options[selLength] = newOpt;
-  }
-
-  function deleteOption(theSel, theIndex)
-  { 
-    var selLength = theSel.length;
-    if(selLength>0)
-    {
-      theSel.options[theIndex] = null;
-    }
-  }
-</script>

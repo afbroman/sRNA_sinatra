@@ -2,11 +2,12 @@ require "sinatra/base"
 
 class SRNA < Sinatra::Base
   get '/' do
+    @genomes = SRNA.load_genomes
     erb :index
   end
   
-  post '/index' do
-    erb :index
+  post '/result' do
+    erb :result
     # Construct config file
     # Offer config file as attachment (see sinatra book p 44)
   end
