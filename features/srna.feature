@@ -11,5 +11,3 @@ Feature: sRNA App testing
     Given I am on the home page
     When I press "Generate Config File"
     Then I should see "NC_014248"
-    And I should see "PS"
-    And I should see "ALL"
