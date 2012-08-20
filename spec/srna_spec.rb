@@ -16,6 +16,9 @@ describe 'Look up soi_size' do
   it 'should look up the soi_size from external ORF file' do
     actual_soi_size = SRNA.find_soi_size("NC_014248")
     actual_soi_size.should eq("5354700")
+
+    another_soi_size = SRNA.find_soi_size("NC_005295")
+    another_soi_size.should eq("1516355")
   end
 
 end

@@ -33,6 +33,15 @@ class SRNA < Sinatra::Base
     end
   end  
 
+  def self.find_soi_size(soi_num)
+    
+    line = File.open(File.dirname(__FILE__) + "/db/ORF/Out_ORF_#{soi_num}", &:readline)
+    if (line =~ /\-\.\.(.*)$/)
+      Regexp.last_match(1)
+    end
+
+  end
+
 
   def build_output_file(genome)
     output_file = ""
