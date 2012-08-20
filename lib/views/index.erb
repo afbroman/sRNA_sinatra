@@ -1,4 +1,15 @@
-%h2 Condor/auto_sRNA Interface - Generate Config File
+<h2>Condor/auto_sRNA Interface - Generate Config File</h2>
+
+<form action="index" method="post" enctype="multipart/form-data">
+  <table>
+
+  </table>
+
+
+
+</form>
+
+<!-- 
 %form{action: :index, method: :post, enctype: "multipart/form-data"}
   %table
     %tr
@@ -82,9 +93,10 @@
   %br
 
   %input{type: "submit"}
+-->
 
 
-:javascript
+<script>
   function addOption(theSel, theText, theValue)
   {
     var newOpt = new Option(theText, theValue);
@@ -100,3 +112,4 @@
       theSel.options[theIndex] = null;
     }
   }
+</script>

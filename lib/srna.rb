@@ -2,13 +2,13 @@ require "sinatra/base"
 
 class SRNA < Sinatra::Base
   get '/' do
-    haml :index, format: :html5
+    erb :index
   end
   
   post '/index' do
-    haml :index, format: :html5
+    erb :index
     # Construct config file
-    # Write config file to disk? Display in browser?
+    # Offer config file as attachment (see sinatra book p 44)
   end
   
 end
