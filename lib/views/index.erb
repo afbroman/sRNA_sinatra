@@ -5,9 +5,9 @@
     <tr>
       <td><br />
         <p>
-        <strong>1. Select your replicon of interest:</strong>
+        <label for="genome"><strong>1. Select your replicon of interest:</strong></label>
 
-        <select name="genome">
+        <select id="genome" name="genome">
           <% @genomes.each do |name| %>
             <option value="<%= name[0] %>"><%= "#{name[1]} - #{name[2]} - #{name[0]}"%></option>
           <% end %>
@@ -17,18 +17,18 @@
         <table>
           <tr>
             <td>
-              <input type=radio name="PS" checked value="ALL">Option 1: All replicons<br />
+              <label><input type=radio name="PS" checked value="ALL" />Option 1: All replicons<label><br />
               <table>
                 <tr>
                   <td width="32px">&nbsp;&nbsp;&nbsp;</td>
                   <td>
-                    <input type="checkbox" name="INC_PS">Include replicons in same species</input>
+                    <label><input type="checkbox" name="INC_PS" />Include replicons in same species</label>
                   </td>
                 </tr>
                 <tr>
                   <td></td>
                   <td>
-                    Excluded replicons:<br />
+                    <label for="sel1">Excluded replicons:</label><br />
                     <select name="sel1" id="sel1" size="6" multiple="multiple" style="width: 360px; font-size: 8pt"></select>
                   </td>
                   <td>
@@ -36,7 +36,7 @@
                     <input type="button" value="Remove ->" onclick="moveOptions(this.form.sel1, this.form.sel2);" /><br />
                   </td>
                   <td>
-                    All replicons:<br />
+                    <label for="sel2">All replicons:</label><br />
                     <select name="sel2" id="sel2" size="6" multiple="multiple" style="width: 360px; font-size: 8pt">
                       <% @genomes.each do |name| %>
                         <option value="<%= name[0] %>"><%= "#{name[1]} - #{name[2]} - #{name[0]}"%></option>
@@ -47,12 +47,12 @@
                 </tr>
               </table>
 
-              <input type="radio" name="PS" value="INC">Option 2: Select individual replicons</input><br />
+              <label><input type="radio" name="PS" value="INC" />Option 2: Select individual replicons</label><br />
               <table>
                 <tr>
                   <td width="24px">&nbsp;</td>
                   <td>
-                    Included replicons:<br />
+                    <label for="sel3">Included replicons:</label><br />
                     <select name="sel3" id="sel3" size="6" multiple="multiple" style="width: 360px; font-size: 8pt"></select>
                   </td>
                   <td>
@@ -60,7 +60,7 @@
                     <input type="button" value="Remove ->" onclick="moveOptions(this.form.sel3, this.form.sel4);" /><br />
                   </td>
                   <td>
-                    All replicons:<br />
+                    <label for="sel4">All replicons:</label><br />
                     <select name="sel4" id="sel4" size="6" multiple="multiple" style="width: 360px; font-size: 8pt">
                       <% @genomes.each do |name| %>
                         <option value="<%= name[0] %>"><%= "#{name[1]} - #{name[2]} - #{name[0]}"%></option>
