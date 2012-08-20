@@ -70,7 +70,7 @@ class SRNA < Sinatra::Base
     output_file << "known sRNAs: \t\t\t All_known_sRNAs.txt\n"
     output_file << "Output File Name: \t\t\t #{genome}_sRNA.out\n"
 
-    output_file << "chromosome size: \t\t\t $soi_size\n"
+    output_file << "chromosome size: \t\t\t #{SRNA.find_soi_size(genome)}\n"
     output_file << "Term. from ORF Stop (sense) (1a): \t\t\t #{params[:ORF_STOP_SENSE]}\n"
     output_file << "Term. from ORF Stop (antisense) (1b): \t\t\t -50\n" # hardcoded ORF_STOP_ANTISENSE
     output_file << "Term. from ORF Start (sense): \t\t\t #{params[:ORF_START_SENSE]}\n"
